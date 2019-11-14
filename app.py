@@ -2,33 +2,31 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import altair as alt
-import vega_datasets
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(children=[
-    html.H1(children='Hello Dash World!'),
+    html.H1(children='Hello Dash'),
 
     html.Div(children='''
-        Dash is a web application framework for Python.
+        Dash: A web application framework for Python.
     '''),
 
-    html.Iframe(
-        id='plot',
-        height='500',
-        width='1000',
-        sandbox='allow-scripts',
-                
-        alt.Chart(vega_datasets.data.cars.url).mark_point().encode(
-            alt.X('Displacement:Q'),
-            alt.Y('Horsepower:Q')
-        ).properties(title='Horsepower vs. Displacement').to_html()
+    dcc.Graph(
+        id='example-graph',
+        figure={
+            'data': [
+                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
+                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+            ],
+            'layout': {
+                'title': 'Dash Data Visualization'
+            }
+        }
     )
-
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port = 9999)
