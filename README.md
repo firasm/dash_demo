@@ -5,28 +5,38 @@ The folder structure is:
 ```
 .
 |---python_dash
-    |---01_images
+    |---Class App
+        |--app1.py #Lecture 1
+        |--app2.py #Lecture 2
+        |--app3.py #Lecture 3
+        |--app4.py #Lecture 4
+    |---01_
         |---README.MD
-        |---app.py
+        |---app.R
         |---requirements.txt
         |---Procfile
         |---assets (optional)
-    |---02_dropdown
+    |---02_
         |---README.MD
-        |---app.py
+        |---app.R
         |---requirements.txt
         |---Procfile
         |---assets (optional)
 |---R_dash
-    |---01_images
+    |---Class App
+        |--app1.R #Lecture 5
+        |--app2.R #Lecture 6
+        |--app3.R #Lecture 7
+        |--app4.R #Lecture 8
+    |---01_
         |---README.MD
-        |---app.py
+        |---app.R
         |---requirements.txt
         |---Procfile
         |---assets (optional)
-    |---02_dropdown
+    |---02_
         |---README.MD
-        |---app.py
+        |---app.R
         |---requirements.txt
         |---Procfile
         |---assets (optional)
