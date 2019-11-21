@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .vega-actions a {
+        margin-right: 12px;
+        color: #757575;
+        font-weight: normal;
+        font-size: 13px;
+    }
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@3.4.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@4"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"title": {"fontSize": 24, "font": "Arial", "anchor": "start", "fontColor": "#000000"}, "view": {"height": 300, "width": 400}, "axisX": {"domain": true, "gridColor": "#DEDDDD", "domainWidth": 1, "grid": false, "labelFont": "Arial", "labelFontSize": 12, "labelAngle": 0, "tickColor": "#000000", "tickSize": 5, "titleFont": "Arial", "titleFontSize": 16, "titlePadding": 10, "title": "X Axis Title (units)"}, "axisY": {"domain": false, "grid": true, "gridColor": "#DEDDDD", "gridWidth": 1, "labelFont": "Arial", "labelFontSize": 14, "labelAngle": 0, "titleFont": "Arial", "titleFontSize": 16, "titlePadding": 10, "title": "Y Axis Title (units)"}}, "data": {"url": "https://vega.github.io/vega-datasets/data/cars.json"}, "mark": {"type": "point", "size": 90}, "encoding": {"tooltip": [{"type": "quantitative", "field": "Horsepower"}, {"type": "quantitative", "field": "Displacement"}], "x": {"type": "quantitative", "field": "Displacement", "title": "Displacement (mm)"}, "y": {"type": "quantitative", "field": "Horsepower", "title": "Horsepower (h.p.)"}}, "height": 350, "selection": {"selector001": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Horsepower vs. Displacement", "width": 500, "$schema": "https://vega.github.io/schema/vega-lite/v3.4.0.json"};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
