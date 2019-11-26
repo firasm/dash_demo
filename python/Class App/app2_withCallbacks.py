@@ -80,12 +80,13 @@ def make_plot(xval = 'Displacement'):
                 'Miles_per_Gallon':'quantitative'
     }
 
-    # Create a plot of the Displacement and the Horsepower of the cars dataset
+    # Create a plot from the cars dataset
 
     chart = alt.Chart(vega_datasets.data.cars.url).mark_point(size=90).encode(
                 alt.X(xval,type=typeDict[xval], title=xval),
                 alt.Y('Horsepower:Q', title = 'Horsepower (h.p.)'),
-                tooltip = ['Horsepower:Q', 'Displacement:Q']
+                tooltip = [{"type":typeDict[xval], "field":xval},
+                            'Horsepower:Q',]
             ).properties(title='Horsepower vs. Displacement',
                         width=500, height=350).interactive()
 
@@ -133,6 +134,8 @@ app.layout = html.Div([
                 '''),
 
     ## these two components are related to dropdown
+    # Let's comment out the demo-dropdown and dd-output to de-clutter our app a bit
+
     dcc.Dropdown(
         id='demo-dropdown',
         options=[
@@ -168,12 +171,22 @@ app.layout = html.Div([
         html.Iframe(height='200', width='10',style={'border-width': '0'})
 ])
 
+# This first callback inserts raw text into an html.Div with id 'dd-output'
+#       We normally omit the 'children' property as it is always the first property but this
+#       just tells Dash to show the text. Every dash component has a 'children' property
+# Note that the input argument needs to be provided as a list
+# update_output is simply the function that runs when `demo-dropdown` is changed
+# Let's comment out this to de-clutter our app once we know how it works
 @app.callback(
     dash.dependencies.Output('dd-output', 'children'),
     [dash.dependencies.Input('demo-dropdown', 'value')])
 def update_output(value):
     return '\n \n You have selected {}\n \n'.format(value)
 
+# This second callback tells Dash the output is the `plot` IFrame; srcDoc is a 
+# special property that takes in RAW html as an input and renders it
+# As input we take in the values from second dropdown we created (dd-chart) 
+# then we run update_plot
 @app.callback(
     dash.dependencies.Output('plot', 'srcDoc'),
     [dash.dependencies.Input('dd-chart', 'value')])
