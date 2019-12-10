@@ -122,7 +122,7 @@ graph <- dccGraph(
 app$layout(
   htmlDiv(
     list(
-      htmlH1('Gapminder Dash Demo'),
+      htmlH1('Gapminder Dash Demo (No interactivity yet!)'),
       htmlH2('Looking at country data interactively'),
       #selection components go here
       htmlLabel('Select a year range:'),
