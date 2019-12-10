@@ -17,11 +17,11 @@ app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.c
 yearMarks <- map(unique(gapminder$year), as.character)
 names(yearMarks) <- unique(gapminder$year)
 yearSlider <- dccRangeSlider(
-  id="year",
+  id = "year",
   marks = yearMarks,
   min = 1952,
   max = 2007,
-  step=5,
+  step = 5,
   value = list(1952, 2007)
 )
 
@@ -55,9 +55,9 @@ yaxisDropdown <- dccDropdown(
 
 # Uses default parameters such as all_continents for initial graph
 all_continents <- unique(gapminder$continent)
-make_graph <- function(years=c(1952, 2007), 
-                       continents=all_continents,
-                       yaxis="gdpPercap"){
+make_graph <- function(years = c(1952, 2007), 
+                       continents = all_continents,
+                       yaxis = "gdpPercap"){
 
   # gets the label matching the column value
   y_label <- yaxisKey$label[yaxisKey$value==yaxis]
@@ -70,9 +70,9 @@ make_graph <- function(years=c(1952, 2007),
   # make the plot!
   # on converting yaxis string to col reference (quosure) by `!!sym()`
   # see: https://github.com/r-lib/rlang/issues/116
-  p <- ggplot(data, aes(x=year, y=!!sym(yaxis), colour=continent)) +
-    geom_point(alpha=0.6) +
-    scale_color_manual(name="Continent", values=continent_colors) +
+  p <- ggplot(data, aes(x = year, y = !!sym(yaxis), colour = continent)) +
+    geom_point(alpha = 0.6) +
+    scale_color_manual(name = "Continent", values = continent_colors) +
     scale_x_continuous(breaks = unique(data$year))+
     xlab("Year") +
     ylab(y_label) +
@@ -90,7 +90,7 @@ graph <- dccGraph(
 
 # Use another function to get filtered data for our table
 make_table <- function(years=c(1952, 2007), 
-                       continents=all_continents){
+                       continents = all_continents){
   
   gapminder %>%
     filter(year >= years[1] & year <= years[2]) %>%
@@ -99,12 +99,13 @@ make_table <- function(years=c(1952, 2007),
   
 }
 
+# NEW: Added table that can be sorted!
 # Table that can be sorted by column
 table <- dashDataTable(
   id = "gap-table",
   # these make the table scrollable
-  fixed_rows= list(headers = TRUE, data = 0),
-  style_table= list(
+  fixed_rows = list(headers = TRUE, data = 0),
+  style_table = list(
     maxHeight = '200',
     overflowY = 'scroll'
   ),
@@ -148,11 +149,11 @@ app$layout(
 # BUT can use multiple inputs for each!
 app$callback(
   #update figure of gap-graph
-  output=list(id='gap-graph', property='figure'),
+  output=list(id = 'gap-graph', property='figure'),
   #based on values of year, continent, y-axis components
-  params=list(input(id='year', property='value'),
-              input(id='continent', property='value'),
-              input(id='y-axis', property='value')),
+  params=list(input(id = 'year', property='value'),
+              input(id = 'continent', property='value'),
+              input(id = 'y-axis', property='value')),
   #this translates your list of params into function arguments
   function(year_value, continent_value, yaxis_value) {
     make_graph(year_value, continent_value, yaxis_value)
@@ -160,9 +161,9 @@ app$callback(
 
 app$callback(
   #update data of gap-table
-  output=list(id='gap-table', property='data'),
-  params=list(input(id='year', property='value'),
-              input(id='continent', property='value')),
+  output=list(id = 'gap-table', property='data'),
+  params=list(input(id = 'year', property='value'),
+              input(id = 'continent', property='value')),
   function(year_value, continent_value) {
     make_table(year_value, continent_value)
   })
