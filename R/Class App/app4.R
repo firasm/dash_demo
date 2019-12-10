@@ -69,17 +69,26 @@ make_graph <- function(years = c(1952, 2007),
  
   # make the plot!
   # on converting yaxis string to col reference (quosure) by `!!sym()`
-  # see: https://github.com/r-lib/rlang/issues/116
-  p <- ggplot(data, aes(x = year, y = !!sym(yaxis), colour = continent)) +
+  # see: https://github.com/r-lib/rlang/issues/116#issuecomment-298969559
+  #
+  # `sym()` turns strings (or list of strings) to symbols (https://www.rdocumentation.org/packages/rlang/versions/0.2.2/topics/sym)
+  #
+  # `paste` concatenates vectors after converting to characters (https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/paste)
+
+  p <- ggplot(data, aes(x = year, y = !!sym(yaxis), colour = continent,
+                        text = paste('continent: ', continent,
+                                     '</br></br></br> Year:', year,
+                                     '</br></br></br> GDP:', gdpPercap))) +
     geom_point(alpha = 0.6) +
-    scale_color_manual(name = "Continent", values = continent_colors) +
+    scale_color_manual(name = 'Continent', values = continent_colors) +
     scale_x_continuous(breaks = unique(data$year))+
     xlab("Year") +
     ylab(y_label) +
     ggtitle(paste0("Change in ", y_label, " Over Time")) +
     theme_bw()
-  
-  ggplotly(p)
+
+  # passing c("text") into tooltip only shows the contents of 
+  ggplotly(p, tooltip = c("text"))
 }
 
 # Now we define the graph as a dash component using generated figure
