@@ -25,7 +25,9 @@ dat <- data.frame(
   students = c(35, 22, 15, 28)
 )
 
-p <- ggplot(data=dat, aes(x=lab_session, y=students, fill=likes)) +
+p <- ggplot(data=dat, aes(x=lab_session, 
+                          y=students, 
+                          fill=likes)) +
   geom_bar(stat="identity", position="dodge") + 
   theme_bw()
 
