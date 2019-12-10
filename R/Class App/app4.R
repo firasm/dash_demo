@@ -1,4 +1,5 @@
-# Adding full interactivity
+### Extending app3.R and filling in the blanks
+### Adding full interactivity
 
 library(dash)
 library(dashCoreComponents)
@@ -13,7 +14,7 @@ app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.c
 # Selection components
 
 #We can get the years from the dataset to make ticks on the slider
-yearMarks <- lapply(unique(gapminder$year), as.character)
+yearMarks <- map(unique(gapminder$year), as.character)
 names(yearMarks) <- unique(gapminder$year)
 yearSlider <- dccRangeSlider(
   id="year",
@@ -26,7 +27,9 @@ yearSlider <- dccRangeSlider(
 
 continentDropdown <- dccDropdown(
   id = "continent",
-  options = lapply( # a shortcut for defining your options
+  # map/lapply can be used as a shortcut instead of writing the whole list
+  # especially useful if you wanted to filter by country!
+  options = map(
     levels(gapminder$continent), function(x){
       list(label=x, value=x)
     }),
@@ -38,9 +41,10 @@ continentDropdown <- dccDropdown(
 # to create the dropdown and convert colnames -> labels when plotting
 yaxisKey <- tibble(label = c("GDP Per Capita", "Life Expectancy", "Population"),
                    value = c("gdpPercap", "lifeExp", "pop"))
+
 yaxisDropdown <- dccDropdown(
   id = "y-axis",
-  options = lapply(
+  options = map(
     1:nrow(yaxisKey), function(i){
       list(label=yaxisKey$label[i], value=yaxisKey$value[i])
     }),
@@ -104,7 +108,7 @@ table <- dashDataTable(
     maxHeight = '200',
     overflowY = 'scroll'
   ),
-  columns = lapply(colnames(gapminder), 
+  columns = map(colnames(gapminder), 
                    function(colName){
                      list(
                        id = colName,
