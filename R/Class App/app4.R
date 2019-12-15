@@ -71,9 +71,11 @@ make_graph <- function(years = c(1952, 2007),
   # on converting yaxis string to col reference (quosure) by `!!sym()`
   # see: https://github.com/r-lib/rlang/issues/116#issuecomment-298969559
   #
-  # `sym()` turns strings (or list of strings) to symbols (https://www.rdocumentation.org/packages/rlang/versions/0.2.2/topics/sym)
+  # `sym()` turns strings (or list of strings) to symbols 
+  # (https://www.rdocumentation.org/packages/rlang/versions/0.2.2/topics/sym)
   #
-  # `paste` concatenates vectors after converting to characters (https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/paste)
+  # `paste` concatenates vectors after converting to characters 
+  # (https://www.rdocumentation.org/packages/base/versions/3.6.1/topics/paste)
 
   p <- ggplot(data, aes(x = year, y = !!sym(yaxis), colour = continent,
                         text = paste('continent: ', continent,
@@ -177,6 +179,6 @@ app$callback(
     make_table(year_value, continent_value)
   })
 
-app$run_server()
+app$run_server(debug = TRUE)
 
 ### App created by Kate Sedivy-Haley as part of the DSCI 532 Teaching Team
