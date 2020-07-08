@@ -1,50 +1,30 @@
-This repo contains a list of useful app snippets that - in most cases - only do one thing, so that people can mix and match apps.
+# Dash Tutorial
 
-This change was made at 3:10 PM on Thursday.
+This repo contains some sample Dash apps in both Python and R, as well as a quick tutorial to get you started with Dash.
 
-The folder structure is:
+## Introduction
 
-```
-.
-|---python_dash
-    |---Class App
-        |--app1.py #Lecture 1
-        |--app2.py #Lecture 2
-        |--app3.py #Lecture 3
-        |--app4.py #Lecture 4
-    |---01_
-        |---README.MD
-        |---app.R
-        |---requirements.txt
-        |---Procfile
-        |---assets (optional)
-    |---02_
-        |---README.MD
-        |---app.R
-        |---requirements.txt
-        |---Procfile
-        |---assets (optional)
-|---R_dash
-    |---Class App
-        |--app1.R #Lecture 5
-        |--app2.R #Lecture 6
-        |--app3.R #Lecture 7
-        |--app4.R #Lecture 8
-    |---01_
-        |---README.MD
-        |---app.R
-        |---requirements.txt
-        |---Procfile
-        |---assets (optional)
-    |---02_
-        |---README.MD
-        |---app.R
-        |---requirements.txt
-        |---Procfile
-        |---assets (optional)
-```        
+### Why Dash?
+
+- Available in R and Python
+- Web-based
+- Open Source
+- Easily versioned
+- Fast, light-weight
+- Separate your wrangling/analysis from dashboarding
+- Customizable aesthetics with bootstrap components and CSS
+- Continuous integration/deployment
+
+### Demo of Sample Dash applications
+
+- "Toy" app
+- Explore data app
+- "Production"-ready app
+
+## Dash Syntax
+
+See slides!
+
 ## Contributing
 
 We welcome all contributions to this project! If you notice a bug, or have a feature request, please open up an issue [here](). If you'd like to contribute a feature or bug fix, you can fork our repo and submit a pull request. We will review pull requests within 7 days. All contributors must abide by our [code of conduct]() (coming soon).
-
-This is an update to the README that I am doing at 3:34 PM.
